@@ -1,0 +1,14 @@
+# Dependencies for france_tmax_gdpcir.py
+# (reads CIL-GDPCIR daily TMax over France from the Microsoft Planetary Computer)
+#
+# Install with:  pip install -r requirements.txt
+# Lower bounds are conservative.
+
+planetary-computer>=1.0   # signs STAC assets with an Azure SAS token (no account needed)
+pystac-client>=0.7        # STAC API search client
+xarray>=2023.1            # dataset handling / France subsetting
+zarr>=2.13                # Zarr store backend
+adlfs>=2023.1             # fsspec backend for Azure Blob (abfs) Zarr stores
+dask>=2023.1              # lazy chunked reads of the France window
+netCDF4>=1.6              # NetCDF engine for writing the output files
+cftime>=1.6               # non-standard calendars (noleap etc.)

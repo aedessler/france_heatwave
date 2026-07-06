@@ -1,0 +1,12 @@
+# Dependencies for france_tmax_cordex.py
+# (retrieves EURO-CORDEX EUR-11 daily TMax over France from the Copernicus CDS)
+#
+# Install with:  pip install -r requirements.txt
+# Lower bounds are conservative.
+
+cdsapi>=0.7         # Copernicus Climate Data Store API client (reads ~/.cdsapirc)
+xarray>=2023.1      # dataset handling / rotated-grid subsetting
+netCDF4>=1.6        # NetCDF engine for reading CORDEX files + writing output
+cftime>=1.6         # non-standard calendars (360-day, noleap, etc.)
+numpy>=1.23         # rotated-grid France mask
+pandas>=1.5         # member index CSV

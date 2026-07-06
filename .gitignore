@@ -1,0 +1,15 @@
+# Data files
+*.nc
+*.csv
+!ERA5_france_june_tmax_2000-2026.csv
+!france_daily_tmax.csv
+
+# Excluded folders
+extra stuff/
+
+# Documents
+carbonbrief.docx
+
+# System / tool files
+.DS_Store
+.claude/

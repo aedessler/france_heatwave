@@ -1,0 +1,12 @@
+# Dependencies for france_tmax_cmip6.py
+# (reads NEX-GDDP-CMIP6 daily TMax over France from AWS S3)
+#
+# Install with:  pip install -r requirements.txt
+# Lower bounds are conservative; the script was tested with the versions noted.
+
+xarray>=2023.1        # tested: 2025.12.0  -- dataset handling / subsetting
+s3fs>=2023.1          # tested: 2025.5.1   -- anonymous S3 access to the bucket
+h5netcdf>=1.1         # tested: 1.7.3      -- NetCDF4/HDF5 backend for xarray
+netCDF4>=1.6          # tested: 1.7.4      -- alternate NetCDF engine + writing output
+cftime>=1.6           # tested: 1.6.5      -- non-standard calendars (noleap, etc.)
+dask>=2023.1          # tested: 2026.3.0   -- optional; lazy/chunked array support
