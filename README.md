@@ -24,28 +24,28 @@ France temperatures/
 ├── france_tmax_ensemble_max.png   one line per dataset (annual max across models)
 │
 ├── NEX-GDDP/                       NASA NEX-GDDP-CMIP6 — 0.25° (~25 km) statistical downscaling
-│   ├── france_tmax_cmip6.py        France daily TMax, 2000–2080, historical+ssp245   [DONE]
+│   ├── france_tmax_cmip6.py        France daily TMax, 2000–2080, historical+ssp245)
 │   ├── tmax_france_results/        30 output .nc (~4.4 GB), one per model
 │   ├── gcp_startup.sh              boot/resume script for VM `france-tmax`
 │   ├── requirements.txt
 │   └── README.md                   ← NEX-GDDP details (S3 access, splice, runbook)
 │
 ├── CIL-GDPCIR/                     CIL Global Downscaled Projections — bias-corrected & downscaled
-│   ├── france_tmax_gdpcir.py       France daily TMax, 2000–2080, ssp245              [DONE]
+│   ├── france_tmax_gdpcir.py       France daily TMax, 2000–2080, ssp245    
 │   ├── tmax_france_results/        23 output .nc, one per model
 │   ├── gcp_startup_gdpcir.sh
 │   ├── requirements.txt
 │   └── README.md
 │
 ├── EURO-CORDEX/                    EURO-CORDEX EUR-11 — ~12.5 km dynamical downscaling
-│   ├── france_tmax_cordex.py       France daily TMax, RCP4.5, 2006–2080              [DONE]
+│   ├── france_tmax_cordex.py       France daily TMax, RCP4.5, 2006–2080 
 │   ├── tmax_france_cordex_results/ 11 output .nc, one per GCM×RCM pair
 │   ├── gcp_startup_cordex.sh
 │   ├── requirements.txt
 │   └── README.md                   ← EURO-CORDEX details (CDS access, rotated grid, runbook)
 │
 └── extra stuff/
-    └── global average/             monthly global-mean tas, 1950–2100 (NEX-GDDP-derived)  [DONE]
+    └── global average/             monthly global-mean tas, 1950–2100 (NEX-GDDP-derived)
         ├── global_monthly_tas_cmip6.py · gcp_startup_globaltas.sh
         └── tas_global_results/     33 model .nc + .csv (area-weighted 60°S–90°N mean)
 ```
@@ -158,20 +158,6 @@ the cache into the final per-member NetCDF.
 
 ---
 
-## ⚠️ float32 gotcha — cast to float64 before averaging
-
-All the France `tasmax` NetCDFs store the variable as **float32** (to halve file size).
-Reducing in float32 loses precision. For any **mean / anomaly / trend /
-area-average**, cast first:
-
-```python
-ds.tasmax.astype("float64").mean(...)        # NOT ds.tasmax.mean()
-```
-
-`.min()` / `.max()` are unaffected (no accumulation).
-
----
-
 ## Toolchain & credentials
 
 - Python 3, `xarray` + `netCDF4`/`h5netcdf` + `cftime`; see each folder's
@@ -188,8 +174,8 @@ ds.tasmax.astype("float64").mean(...)        # NOT ds.tasmax.mean()
 
 | Pipeline | Status |
 |---|---|
-| NEX-GDDP France TMax | **Done** — 30 models in `NEX-GDDP/tmax_france_results/` |
-| CIL-GDPCIR France TMax | **Done** — 23 models in `CIL-GDPCIR/tmax_france_results/` |
-| EURO-CORDEX France TMax | **Done** — 11 GCM×RCM pairs in `EURO-CORDEX/tmax_france_cordex_results/` |
-| Global-mean `tas` | **Done** — 33 models in `extra stuff/global average/tas_global_results/` |
-| Analysis CSV + plots | **Done** — `france_daily_tmax.csv` + 2 PNGs |
+| NEX-GDDP France TMax | 30 models in `NEX-GDDP/tmax_france_results/` |
+| CIL-GDPCIR France TMax | 23 models in `CIL-GDPCIR/tmax_france_results/` |
+| EURO-CORDEX France TMax | 11 GCM×RCM pairs in `EURO-CORDEX/tmax_france_cordex_results/` |
+| Global-mean `tas` | 33 models in `extra stuff/global average/tas_global_results/` |
+| Analysis CSV + plots | `france_daily_tmax.csv` + 2 PNGs |
